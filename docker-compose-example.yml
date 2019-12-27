@@ -1,0 +1,35 @@
+---
+version: "3.5"
+
+services:
+  b2flow-engine-builder:
+    image: b2flow-engine-builder
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+  docker-dind:
+    image: docker:19.03.0-dind
+    privileged: true
+    environment:
+      DOCKER_TLS_CERTDIR: ""
+
+  b2flow-builder-runner:
+    image: b2flow-engine-builder
+    links:
+      - docker-dind
+    depends_on:
+      - docker-dind
+    environment:
+      DOCKER_HOST: tcp://docker-dind:2375
+      DOCKER_TLS_CERTDIR: ""
+      B2FLOW__DAG__JOB__NAME: job1
+      B2FLOW__IMAGE__TAG: 1
+      B2FLOW__IMAGE__NAME: x-team_x-project_x-dag_job1
+      B2FLOW__STORAGE__TYPE: 'gcs'
+      B2FLOW__STORAGE__S3__ACCESS_KEY_ID: 'key_id'
+      B2FLOW__STORAGE__S3__SECRET_KEY_ID: 'secret_id'
+      B2FLOW__STORAGE__S3__REGION: 'us-west1'
+      B2FLOW__STORAGE__S3__BUCKET: 'bucket-name'
+      B2FLOW__STORAGE__URI: 's3://bucket-name/dags/source.zip'
+      B2FLOW__REGISTRY__GCP__KEYFILE: 'Service Account Encoded base64'
