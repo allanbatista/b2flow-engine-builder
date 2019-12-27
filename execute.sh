@@ -1,5 +1,9 @@
 #!/bin/bash
 set -e
+echo "--------------------------------------------------"
+echo "                START DOCKER DAEMON               "
+echo "--------------------------------------------------"
+sh /usr/local/bin/dockerd-entrypoint.sh &
 
 echo "--------------------------------------------------"
 echo "                   ENVIRONMENTS                   "
