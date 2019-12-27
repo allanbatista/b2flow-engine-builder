@@ -16,8 +16,9 @@ echo "                   ENVIRONMENTS                   "
 echo "--------------------------------------------------"
 export B2FLOW__SOURCE_FILE=source.zip
 export B2FLOW__SOURCE_PATH=$(pwd)/source
-export B2FLOW__IMAGE_NAME=$B2FLOW__IMAGE__NAME:$B2FLOW__IMAGE__TAG
+export B2FLOW__IMAGE_NAME="gcr.io/${B2FLOW__GOOGLE__PROJECT_ID}/${B2FLOW__TEAM__NAME}_${B2FLOW__PROJECT__NAME}_${B2FLOW__DAG__NAME}_${B2FLOW__DAG__JOB__NAME}:${B2FLOW__DAG__VERSION}"
 env | grep B2FLOW
+
 
 echo "--------------------------------------------------"
 echo "               DOWNLOAD SOURCE CODE               "
