@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dind
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: docker-info
+        image: allanbatista/b2flow-engine-builder
+        command: ["docker", "info"]
+  backoffLimit: 4

@@ -8,7 +8,7 @@ LABEL mantainer="Allan Batista <allan@allanbatista.com.br>"
 ENV DOCKER_HOST="tcp://localhost:2375"
 ENV DOCKER_TLS_CERTDIR=""
 ENV PYTHONUNBUFFERED=1
-ENV HOME_APP /opt/app
+ENV HOME_APP=/opt/app
 
 ######################################################################
 #                           install python                           #
@@ -38,7 +38,7 @@ WORKDIR ${HOME_APP}
 #                          install requirements                      #
 ######################################################################
 RUN pip install -r requirements.txt
-RUN chmod +x execute.sh
+RUN chmod +x builder.sh && chmod +x execute.sh
 
 ######################################################################
 #                              executing                             #

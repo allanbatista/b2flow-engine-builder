@@ -18,3 +18,4 @@ services:
       B2FLOW__STORAGE__S3__BUCKET: 'bucket-name'
       B2FLOW__STORAGE__URI: 's3://bucket-name/dags/source.zip'
       B2FLOW__REGISTRY__GCP__KEYFILE: 'Service Account Encoded base64'
+      B2FLOW__BUILDER__CALLBACK__URI: 'https://domain.com/callback?any_query_string=xxxx'
