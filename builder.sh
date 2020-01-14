@@ -17,7 +17,7 @@ echo "                   ENVIRONMENTS                   "
 echo "--------------------------------------------------"
 export B2FLOW__SOURCE_FILE=source.zip
 export B2FLOW__SOURCE_PATH=$(pwd)/source
-export B2FLOW__IMAGE_NAME="gcr.io/${B2FLOW__GOOGLE__PROJECT_ID}/${B2FLOW__TEAM__NAME}_${B2FLOW__PROJECT__NAME}_${B2FLOW__DAG__NAME}_${B2FLOW__DAG__JOB__NAME}:${B2FLOW__DAG__VERSION}"
+export B2FLOW__IMAGE_NAME="gcr.io/${B2FLOW__IMAGE__NAME}:${B2FLOW__IMAGE__TAG}"
 env | grep B2FLOW
 
 echo "--------------------------------------------------"
@@ -28,8 +28,7 @@ python3 -m b2flow_builder.download; ls -lh $B2FLOW__SOURCE_FILE
 echo "--------------------------------------------------"
 echo "                 UNZIP SOURCE CODE                "
 echo "--------------------------------------------------"
-mkdir -p $B2FLOW__SOURCE_PATH; cp $B2FLOW__SOURCE_FILE $B2FLOW__SOURCE_PATH; cd $B2FLOW__SOURCE_PATH
-unzip $B2FLOW__SOURCE_FILE; ls -lhR
+unzip -o $B2FLOW__SOURCE_FILE -d $B2FLOW__SOURCE_PATH; ls -lhR $B2FLOW__SOURCE_PATH
 
 echo "--------------------------------------------------"
 echo "                  BUILDING IMAGE                  "
