@@ -11,4 +11,15 @@ storage = Storage(
 
 bucket_name = os.environ['B2FLOW__STORAGE__S3__BUCKET']
 bucket = storage.client.Bucket(bucket_name)
-bucket.download_file(os.environ['B2FLOW__STORAGE__URI'].replace(f"s3://{bucket_name}/", ""), "source.zip")
+uri = os.environ['B2FLOW__STORAGE__URI'].strip()
+
+if uri.startswith("https"):
+    _domain, _bucket_name, path = uri.replace("https://", "").split("/", 2)
+    bucket.download_file(path, 'source.zip')
+
+elif "s3" in uri or "gs" in uri:
+    _bucket_name, path = uri.replace("s3://", "").replace("gs://", "").split("/", 1)
+    bucket.download_file(path, "source.zip")
+
+else:
+    bucket.download_file(uri, "source.zip")

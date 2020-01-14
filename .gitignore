@@ -3,3 +3,4 @@ venv
 .vscode
 docker-compose.yml
 __pycache__
+source.zip
