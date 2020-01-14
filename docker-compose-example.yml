@@ -2,12 +2,6 @@
 version: "3.5"
 
 services:
-  docker-daemon:
-    image: docker:19.03.0-dind
-    privileged: true
-    environment:
-      DOCKER_TLS_CERTDIR: ""
-
   b2flow-engine-builder:
     build:
       context: .
@@ -25,4 +19,3 @@ services:
       B2FLOW__STORAGE__URI: 's3://bucket-name/dags/source.zip'
       B2FLOW__REGISTRY__GCP__KEYFILE: 'Service Account Encoded base64'
       B2FLOW__BUILDER__CALLBACK__URI: 'https://domain.com/callback?any_query_string=xxxx'
-      DOCKER_HOST: "tcp://docker-daemon:2375"

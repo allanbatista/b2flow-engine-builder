@@ -1,4 +1,4 @@
-FROM docker:19.03.0-dind
+FROM docker:19.03.5-dind
 
 LABEL mantainer="Allan Batista <allan@allanbatista.com.br>"
 

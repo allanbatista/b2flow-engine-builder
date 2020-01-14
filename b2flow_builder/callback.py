@@ -10,21 +10,31 @@ req_log.propagate = True
 
 callback = os.environ.get('B2FLOW__BUILDER__CALLBACK__URI')
 
-if callback is None:
+if callback is None or callback == "":
     print("No Callback defined")
     exit(0)
 
-status_code = sys.argv[1]
-log_file = sys.argv[2]
+try:
+    status_code = sys.argv[1]
+    log_file = sys.argv[2]
 
-data = {
-    'success': status_code == 0,
-    'status_code': status_code,
-    'log': open(log_file, 'r').read()
-}
+    data = {
+        'success': status_code == "0",
+        'status_code': status_code,
+        'log': open(log_file, 'r').read()
+    }
 
-print("callback")
-print(f"POST {callback}")
-print(json.dumps(data))
+    print("callback")
+    print(f"POST {callback}")
+    print(json.dumps(data))
 
-requests.post(callback, json=data)
+    response = requests.post(callback, json=data)
+
+    print("***************** response *****************")
+    print(response.status_code)
+    print(response.content)
+    print("********************************************")
+except:
+    exit(1)
+
+exit(0)
